@@ -14,8 +14,7 @@ import 'userprofile_value.dart';
 class FavoritePage extends StatelessWidget {
   final Future<DataSnapshot>? bookSnap;
   const FavoritePage({super.key, this.bookSnap});
-  @override
-  
+
   @override
   Widget build(BuildContext context){
     return Scaffold(
@@ -45,28 +44,19 @@ class FavoritePageState extends State<_FavoritePage> {
   Future<Map> getBook(String input) async {
     // Get Web API from OpenLibrary
     input = input == "" ? "Default" : input;
-    String searchUrl = 'https://openlibrary.org/search.json?title=$input';
+    List<String> inputSplit = input.split('-');
+    String searchUrl = 'https://openlibrary.org/search.json?title=${inputSplit[0].split(' ').join('+')}&author=${inputSplit[1].split(' ').join('+')}';
     final searchResult = await fetchAlbum(searchUrl); // Get Book information
     return searchResult['docs'][0];
   }
   Future<List<Map>> convertBookInfo(Future<DataSnapshot> snapshot) async {
     List<Map> bookInformationList = [];
     DataSnapshot data = await snapshot;
-    if (data.exists == false){ // Initialize a favorites directory if not exist
-      String? username = UserProfileClass.getUserName();
-      if (username != null){
-        DatabaseReference ref = FirebaseDatabase.instance.ref().child("users/$username");
-        DataSnapshot snap = await ref.get();
-        Map<Object?, Object?> snapMap = snap.value as Map<Object?, Object?>;
-        snapMap["favorites"] = {"nothing": ""};
-        ref.set(snapMap.cast<String, Object?>());
-      }
-    }
     Map<Object?, Object?> titles = data.value as Map<Object?, Object?>;
     for (Object? key in titles.keys){
       if (key == "nothing" && titles[key] == "") continue; // Skip initializer element
-      String titlePair = key as String;
-      Map bookInfo = await getBook(titlePair);
+      String title = key as String;
+      Map bookInfo = await getBook(title);
       bookInformationList.add(bookInfo);
     }
     return bookInformationList;

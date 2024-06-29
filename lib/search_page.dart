@@ -58,11 +58,9 @@ class SearchPageState extends State<_SearchPage> {
         ),
         body: ListView(
           children: [
-            Expanded(flex: 90,
-              child: BookShelf(
-                books: bookCardList, 
-                size: const Size(4.0,14.0) // 4 x 7 grid (row, column)
-              ),
+            BookShelf(
+              books: bookCardList, 
+              size: const Size(4.0,14.0) // 4 x 7 grid (row, column)
             ),
           ]
         )

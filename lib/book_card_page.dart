@@ -36,7 +36,7 @@ class BookInfoPageState extends State<_BookInfoPage> {
       favoritesSnap.then((snapshot){ // Fetch Favorites and add title
         if (snapshot.value != null){
           Map<Object?, Object?> titles = snapshot.value as Map<Object?, Object?>;
-          titles[widget.bookInfo['title']] = "";
+          titles[widget.bookInfo['title'].replaceAll(RegExp('\\W')," ") + '-' + (widget.bookInfo['author_name'] != null ? widget.bookInfo['author_name'][0].replaceAll(RegExp('\\W')," ") : "None")] = "";
           favRef.update(titles.cast<String, Object?>()); // Update List
         }
       });
@@ -46,7 +46,7 @@ class BookInfoPageState extends State<_BookInfoPage> {
       favoritesSnap.then((snapshot){
         if (snapshot.value != null){
           Map<Object?, Object?> titles = snapshot.value as Map<Object?, Object?>; // Get map from database
-          titles.removeWhere((key, value) => key == widget.bookInfo['title']); // Delete title from map
+          titles.removeWhere((key, value) => key == widget.bookInfo['title'].replaceAll(RegExp('\\W')," ") + '-' + (widget.bookInfo['author_name'] != null ? widget.bookInfo['author_name'][0].replaceAll(RegExp('\\W')," ") : "None")); // Delete title from map
           favRef.set(titles.cast<String, Object?>()); // Update list
         }
       });
@@ -61,7 +61,7 @@ class BookInfoPageState extends State<_BookInfoPage> {
         Map<Object?, Object?> titles = snapshot.value as Map<Object?, Object?>;
         titles.forEach((k, v){
           String title = k as String;
-          if (title == widget.bookInfo['title']){
+          if (title == widget.bookInfo['title'].replaceAll(RegExp('\\W')," ") + '-' + (widget.bookInfo['author_name'] != null ? widget.bookInfo['author_name'][0].replaceAll(RegExp('\\W')," ") : "None")){
             setState(() => favoriteIcon = Icons.star_rounded);
           }
         });

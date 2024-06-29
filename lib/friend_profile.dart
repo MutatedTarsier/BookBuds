@@ -26,7 +26,10 @@ class _FriendProfileState extends State<FriendProfile> with TickerProviderStateM
     toggle = !toggle;
   }
   void _favPressed(){
-    Navigator.push(context, MaterialPageRoute(builder: (context) => const FavoritePage()));
+    // Get friend favorites
+    DatabaseReference ref = FirebaseDatabase.instance.ref("users/${widget.name.replaceAll(RegExp('\\W'),"")}/favorites");
+    Future<DataSnapshot> snap = ref.get();
+    Navigator.push(context, MaterialPageRoute(builder: (context) => FavoritePage(bookSnap: snap)));
     toggle = true;
     menu.controller.reverse();
   }
