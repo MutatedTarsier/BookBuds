@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "957207033721",
+    "project_id": "book-buds",
+    "storage_bucket": "book-buds.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:957207033721:android:ef8ab6e7b4e5be7c6921a8",
+        "android_client_info": {
+          "package_name": "bookbuds.com"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDOvf2Ez9qqZTWTdbKjQvmMkZRo_W--xjY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:957207033721:android:f7db24eb34f9d5306921a8",
+        "android_client_info": {
+          "package_name": "com.example.book_buds"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDOvf2Ez9qqZTWTdbKjQvmMkZRo_W--xjY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
